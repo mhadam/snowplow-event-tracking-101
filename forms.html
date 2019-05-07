@@ -1,0 +1,71 @@
+<!-- Use this template to test sending events to Snowplow Mini -->
+
+<html>
+
+  <header>
+
+    <script type="text/javascript" async=1>
+    ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+    p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+    };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+    n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","http://d1fc8wv8zag5ca.cloudfront.net/2.10.2/sp.js","snowplow"));
+    
+    snowplow("newTracker", "test", "collector endpoint goes here", {
+      appId: "test",
+      platform: "web",
+      method: "post",
+      contexts: {
+        webPage: true,
+        performanceTiming: true
+      }
+    });
+
+
+    snowplow('enableActivityTracking', 30, 10); // first ping 30 seconds after the page-view, subsequently every 10 seconds
+
+    snowplow('trackPageView');
+
+    snowplow('enableLinkClickTracking');
+
+    snowplow('enableFormTracking');
+
+    snowplow('trackSelfDescribingEvent', {
+      schema: 'iglu:com.supply/site_search/jsonschema/1-0-0',
+      data: {
+        keywords: 'tub'
+      }
+    });
+
+
+
+    </script>
+
+  </header>
+
+  <body>
+
+    <h1>Test Page</h1>
+
+    <p>This is a test page.</p>
+
+    <form action="/action_page.php">
+      <select name="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat">Fiat</option>
+        <option value="audi">Audi</option>
+      </select>
+      <br><br>
+      <input type="submit">
+    </form>
+
+    <form action="/action_page.php">
+      <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+      <input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+      <input type="checkbox" name="vehicle3" value="Boat" checked> I have a boat<br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+  </body>
+
+</html>

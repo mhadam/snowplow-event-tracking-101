@@ -96,6 +96,8 @@ When we decode the mess of letters under `ue_px`, we'll get:
 }
 ```
 
+The command to decode the payload is this: `echo "<ue_px goes here>" | base64 -D`
+
 ## Under-the-hood
 
 Our trackers use HTTP requests to send their events to a collector. There's two methods we use: `POST` and `GET`.
